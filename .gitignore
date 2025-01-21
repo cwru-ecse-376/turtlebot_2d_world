@@ -1,0 +1,5 @@
+# Files to ignore
+
+# The package build directories
+.obj-x86_64-linux-gnu
+debian
