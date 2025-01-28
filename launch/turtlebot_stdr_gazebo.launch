@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <launch>
 
+<!-- This should be accomplished in the package.xml but is not. -->
+<env name="GAZEBO_RESOURCE_PATH" value="$(find turtlebot_2d_world)" /> !
+
+<!-- This does not work, it must be manually entered at the command line. -->
+<env name="ROBOT_INITIAL_POSE" value="-x 1 -y 2 -z 0" />
+
 <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" >
   <env name="TURTLEBOT_BASE" value="kobuki" />
   <env name="TURTLEBOT_STACKS" value="hexagons" />
   <env name="TURTLEBOT_3D_SENSOR" value="kinect" />
-  <env name="ROBOT_INITIAL_POSE" value="-x 1 -y 2 -z 0" />
-  <env name="GAZEBO_RESOUCE_PATH" value="$(find turtlebot_2d_world)" />
   <arg name="world_file" value="$(find turtlebot_2d_world)/worlds/turtlebot_stdr.world" />
 </include>
 
