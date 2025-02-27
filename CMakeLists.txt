@@ -9,6 +9,9 @@ project(turtlebot_2d_world)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   turtlebot_gazebo
+  geometry_msgs
+  roscpp
+  random_numbers
 )
 
 ## System dependencies are found with CMake's conventions
@@ -132,6 +135,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/turtlebot_2d_world_node.cpp)
+add_executable(state_2_nav src/state_2_nav.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -147,6 +151,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(state_2_nav
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
