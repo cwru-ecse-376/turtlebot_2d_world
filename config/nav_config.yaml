@@ -1,0 +1,10 @@
+
+
+update_freq: 10
+
+model: mobile_base
+
+std_dev_position: 0.1
+std_dev_orientation: 0.01
+
+frame_id: base_link

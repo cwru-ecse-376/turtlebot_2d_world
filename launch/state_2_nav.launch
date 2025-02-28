@@ -1,0 +1,8 @@
+<launch>
+    <arg name="namespace" default="robot0" />
+
+    <node pkg="turtlebot_2d_world" type="state_2_nav" name="state_2_nav" ns="$(arg namespace)" >
+        <rosparam file="$(find turtlebot_2d_world)/config/nav_config.yaml" />
+    </node>
+
+</launch>
