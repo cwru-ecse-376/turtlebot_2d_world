@@ -1,0 +1,73 @@
+<?xml version="1.2"?>
+
+<robot name="turtlebot" xmlns:xacro="http::/ros.org/wiki/xacro">
+
+    <xacro:include filename="$(find turtlebot_description)/robots/kobuki_hexagons_kinect.urdf.xacro" />
+
+    <xacro:property name="visualize" value="true" />
+    <xacro:property name="hz" value="30.0" />
+    <xacro:property name="samples" value="667" />
+    <xacro:property name="min_angle" value="${-2/3 * pi}" />
+    <xacro:property name="max_angle" value=" ${2/3 * pi}" />
+    <xacro:property name="lasers" value="1" />
+    <xacro:property name="beam_min" value="0.0" />
+    <xacro:property name="beam_max" value="0.0" />
+    <xacro:property name="collision_range" value="0.20" />
+    <xacro:property name="min_range" value="0.15" />
+    <xacro:property name="max_range" value="4.09" />
+    <xacro:arg name="namespace" default="" />
+    <xacro:property name="topic_name" value="$(arg namespace)/laser_0" />
+    <xacro:property name="link_name" value="base_link" />
+    <xacro:property name="noise" value="0.01" />
+    <xacro:property name="height" value="0.35" />
+
+    <!-- <link name="${link_name}"> -->
+
+        <gazebo reference="${link_name}">
+            <sensor type="ray" name="laser">
+                <pose>0 0 ${height} 0 0 0</pose>
+                <visualize>${visualize}</visualize>
+                <update_rate>${hz}</update_rate>
+                <ray>
+                    <scan>
+                    <horizontal>
+                        <samples>${samples}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${min_angle}</min_angle>
+                        <max_angle>${max_angle}</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>${lasers}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${beam_min}</min_angle>
+                        <max_angle>${beam_max}</max_angle>
+                    </vertical>
+                    </scan>
+                    <range>
+                        <min>${collision_range}</min>
+                        <max>${max_range}</max>
+                        <resolution>0.001</resolution>
+                    </range>
+                    <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>${noise}</stddev>
+                    </noise>
+                </ray>
+                <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_laser.so">
+                    <topicName>${topic_name}</topicName>
+                    <frameName>${link_name}</frameName>
+                    <min_range>${min_range}</min_range>
+                    <max_range>${max_range}</max_range>
+                    <gaussianNoise>${noise}</gaussianNoise>
+                </plugin>
+            </sensor>        
+        </gazebo>
+    <!-- </link>
+
+    <joint name="base_laser_joint" type="fixed">
+        <parent link="base_link" />
+        <child link="laser_link" />
+    </joint> -->
+
+</robot>
