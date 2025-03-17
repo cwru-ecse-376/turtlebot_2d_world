@@ -208,6 +208,16 @@ install(DIRECTORY
   FILES_MATCHING PATTERN "*.dae"
 )
 
+install(DIRECTORY
+  urdf/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/urdf
+)
+
+install(FILES
+  README.md
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 #############
 ## Testing ##
 #############
